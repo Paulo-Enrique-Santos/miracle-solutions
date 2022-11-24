@@ -181,6 +181,8 @@
                         td6.className = "td";
 
                         td4.id = "pesquisaUsuario" + publicacao.emailUsuario;
+                        td4.innerHTML = 'Aguardando Pesquisa';
+                        td4.style.textAlign = "center";
 
                         tabela_funcionarios.appendChild(tr);
                         tr.appendChild(td1);
@@ -188,10 +190,13 @@
                         tr.appendChild(td4);
                         tr.appendChild(td5);
                         tr.appendChild(td6);
+
+                        if (i == resposta.length - 1) {
+                            atualizarPesquisa(sessionStorage.ID_USUARIO);
+                        }
                     }
                 }
                 );
-                atualizarPesquisa(sessionStorage.ID_USUARIO);
             } else {
                 throw ('Houve um erro na API!');
             }
@@ -201,11 +206,13 @@
 
     }
 
-    function atualizarPesquisa(idUsuario) {
+    function atualizarPesquisa(idUsuario, email) {
 
         fetch(`/usuarios/atualizarPesquisa/${idUsuario}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
+                    boxFeedback.style.display = 'none';
+                    loading.style.display = 'none';
                     throw "Nenhum resultado encontrado!!";
                 }
 
@@ -226,14 +233,21 @@
                         }
                         nota.style.textAlign = "center";
                         if (publicacao.notaTotal != null) {
-                            nota.innerHTML = publicacao. notaTotal + "%";
+                            if (publicacao.notaTotal == 0) {
+                                nota.innerHTML = 'Sem Pesquisa';
+                            } else {
+                                nota.innerHTML = publicacao. notaTotal + "%";
+                            }
                         } else {
-                            nota.innerHTML = 'Sem Pesquisa';
+                            nota.innerHTML = 'Pesquisa Não Realizada';
+                        }
+
+                        if (i == resposta.length - 1) {
+                            boxFeedback.style.display = 'none';
+                            loading.style.display = 'none';
                         }
                     }
                 });
-                boxFeedback.style.display = 'none';
-                loading.style.display = 'none';
             } else {
                 throw ('Houve um erro na API!');
             }
