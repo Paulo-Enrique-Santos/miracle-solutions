@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./CSS/style-contact.css">
+  <link rel="stylesheet" href="./CSS/Estilo.css">
+  <script src="JS/header.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <title>Miracle Solutions | Contato</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="navbar-tittle">
+        <img onclick="goHome()" src="Imagens/logo-empresa/icons8-artificial-intelligence-90.svg" />
+        <h1 onclick="goHome()" class="logoPurple">MIRACLE</h1>
+        <h1 onclick="goHome()" class="logo">SOLUTIONS</h1>
+      </div>
+      <div class="navbar">
+        <div id="menu" class="menu-responsivo">
+          <a href="cadastroEmpresa.html">Cadastrar</a>
+          <a href="login.html">Entrar</a>
+        </div>
+        <button onclick="goSignUp()">Cadastrar</button>
+        <img onclick="openMenu()" class="header-menu" src="Imagens/icon-menu/icons8-menu-96.svg" />
+        <div class="btnLogin">
+          <img onclick="goLogin()" src="Imagens/botao-entrar/icons8-login-64.svg" />
+          <a href="login.html">Entrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2>FALE <span>CONOSCO</span></h2>
+    <div class="card">
+      <div class="logo-contact">
+        <img src="Imagens/logo-empresa/icons8-artificial-intelligence-90.svg" />
+        <div class="texto">
+          <h1 class="logoPurple logoPurpleBlack">MIRACLE </h1>
+          <h1 class="logo">SOLUTIONS</h1>
+        </div>
+      </div>
+      <div class="form">
+        <form action="https://formsubmit.co/aldry.longo@sptech.school" method="POST">
+          <input type="text" name="Nome" placeholder="Nome" required>
+          <input type="tel" name="Telefone" placeholder="Telefone" required>
+          <input type="email" name="E-mail" placeholder="E-mail" required>
+          <textarea type="mensagem" name="Mensagem" id="" cols="30" rows="10" placeholder="Mensagem"
+            required></textarea>
+          <button type="submit">ENVIAR</button>
+        </form>
+      </div>
+    </div>
+    <div class="mascote">
+      <div class="balao">
+        <b>Olá! <br> Como posso ajudar?</b>
+        <img class="balao" src="./Imagens/balao.gif">
+      </div>
+      <div class="dog">
+        <img class="dog" src="./Imagens/mascote.png">
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="container">
+      <div class="labels">
+        <div class="slogan">
+          <h1>VOCÊ <span class="text-pink"> IDEALIZA </span></h1>
+          <h1>A MIRACLE <span class="text-pink"> REALIZA </span></h1>
+        </div>
+        <div class="links">
+          <!-- <a href="">Suporte</a>
+          <a href="">Privacidade</a> -->
+          <a href="contact.html">Fale Conosco</a>
+        </div>
+      </div>
+      <div class="labels">
+        <label>Tel.:(11) 5574-6844</label>
+        <label>E-mail: contato@miracle.com</label>
+        <label>Rua Haddock Lobo 595,</label>
+        <label>São Paulo, 01414-905</label>
+      </div>
+      <div class="labels">
+        <!-- <div class="sociais">
+          <img src="Imagens/socialmedia/icon-twiter/icons8-twitter-squared-64.svg" />
+          <img src="Imagens/socialmedia/icon-instagram/icons8-instagram-64.svg" />
+          <img src="Imagens/socialmedia/icon-facebook/icons8-facebook-64.svg" />
+        </div> -->
+        <div class="patente">
+          <img src="Imagens/bandeira-footer/icons8-brazil-40.svg" alt="" />
+          <label>© Miracle 2022</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  function sendEmail() {
+    Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000
+    fetch("/usuarios/sendEmailForgotPassword", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: inp_email.value,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+</script>

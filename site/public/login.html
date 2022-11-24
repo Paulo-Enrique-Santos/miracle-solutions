@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miracle Solutions | Login</title>
+  <link rel="stylesheet" href="CSS/generic-card.css" />
+  <link rel="stylesheet" href="CSS/Estilo.css" />
+  <link rel="stylesheet" href="CSS/login.css" />
+  <script src="JS/header.js"></script>
+</head>
+
+<body>
+  <!-- Código relacionado ao header -- João -->
+  <div class="header">
+    <div class="container">
+      <div class="navbar-tittle">
+        <img onclick="goHome()" src="Imagens/logo-empresa/icons8-artificial-intelligence-90.svg" />
+        <h1 onclick="goHome()" class="logoPurple">MIRACLE</h1>
+        <h1 onclick="goHome()" class="logo">SOLUTIONS</h1>
+      </div>
+      <div class="navbar">
+        <div id="menu" class="menu-responsivo">
+          <a href="cadastroEmpresa.html">Cadastrar</a>
+          <a href="login.html">Entrar</a>
+        </div>
+        <button onclick="goSignUp()">Cadastrar</button>
+        <img onclick="openMenu()" class="header-menu" src="Imagens/icon-menu/icons8-menu-96.svg" />
+        <div class="btnLogin">
+          <img onclick="goLogin()" src="Imagens/botao-entrar/icons8-login-64.svg" />
+          <a href="login.html">Entrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fim do código relacionado ao header -->
+
+  <div class="banner-login">
+    <div class="container-login">
+      <!-- Card login -->
+      <div class="generic-card" id="login">
+        <div class="box-titles">
+          <h1 class="title">Bem Vindo de Volta!</h1>
+          <h3 class="sub-title">Insira seus dados e faça o login para acessar as dashborads</h3>
+        </div>
+        <div class="card-inputs">
+          <div class="box-input">
+            <label for="">Email:</label>
+            <input type="email" placeholder="helf@miracle.com.br" id="inp_email">
+          </div>
+          <div class="box-input">
+            <label for="">Senha:</label>
+            <input type="password" placeholder="*********" id="inp_senha">
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="box-erro">
+            <span class="label-erro" id="erroLogin"></span>
+          </div>
+          <div class="box-buttons">
+            <button onclick="entrar()">
+              <img src="./Imagens/botao-cadastrar-login/icons8-enter-128.svg" alt="">
+              <span>Login</span>
+            </button>
+          </div>
+          <div class="box-redirect">
+            <span>Esqueceu a Senha? <a onclick="forgotPassword(1)">Redefinir Senha</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Esqueci a senha -->
+      <div class="generic-card card-hidden" id="forgot">
+        <div class="box-titles">
+          <h1 class="title">Insira o Email</h1>
+          <h3 class="sub-title">Insira seu email cadastrado e receba um código de verificação para redefinir a senha
+          </h3>
+        </div>
+        <div class="card-inputs">
+          <div class="box-input">
+            <label for="">Email Cadastrado:</label>
+            <input type="email" placeholder="helf@miracle.com.br" id="inp_email_forgot">
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="box-erro">
+            <span class="label-erro" id="erroForgot"></span>
+          </div>
+          <div class="box-buttons box-double-buttons">
+            <button class="button-back" onclick="backStep(1)">
+              <img class="image" src="./Imagens/previus.png" alt="">
+              <span>Voltar</span>
+            </button>
+            <button onclick="forgotPassword(2)">
+              <span>Enviar</span>
+              <img class="image" src="./Imagens/next.png" alt="">
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card código -->
+      <div class="generic-card card-hidden" id="code">
+        <div class="box-titles">
+          <h1 class="title">Informe o Código</h1>
+          <h3 class="sub-title">Insira o código de 4 digitos que você recebeu no seu email</h3>
+        </div>
+        <div class="card-inputs">
+          <div class="box-input">
+            <label for="">Código de Redefinição:</label>
+            <input type="email" placeholder="0000" id="inp_forgot_code">
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="box-erro">
+            <span class="label-erro" id="erroCode"></span>
+          </div>
+          <div class="box-buttons box-double-buttons">
+            <button class="button-back" onclick="backStep(2)">
+              <img class="image" src="./Imagens/previus.png" alt="">
+              <span>Voltar</span>
+            </button>
+            <button onclick="forgotPassword(3)">
+              <span>Enviar</span>
+              <img class="image" src="./Imagens/next.png" alt="">
+            </button>
+          </div>
+          <div class="box-redirect">
+            <span>Não recebeu o email? 
+              <span style="display: none;" id="inp_count">Aguarde 20 segundos</span> 
+              <a id="inp_resend" onclick="resendEmail()">Envie Novamente</a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Senha -->
+      <div class="generic-card card-hidden" id="password">
+        <div class="box-titles">
+          <h1 class="title">Informe a Nova Senha</h1>
+          <h3 class="sub-title">Insira a baixo a senha que você deseja</h3>
+        </div>
+        <div class="card-inputs">
+          <div class="box-input">
+            <label for="">Nova Senha:</label>
+            <input type="password" placeholder="******" id="inp_forgot_new_password">
+          </div>
+        </div>
+        <div class="card-inputs">
+          <div class="box-input">
+            <label for="">Confirme a Nova Senha:</label>
+            <input type="password" placeholder="******" id="inp_forgot_new_password_confirmation">
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="box-erro">
+            <span class="label-erro" id="erroPassword"></span>
+          </div>
+          <div class="box-buttons box-double-buttons">
+            <button class="button-back" onclick="backStep(3)">
+              <img class="image" src="./Imagens/previus.png" alt="">
+              <span>Voltar</span>
+            </button>
+            <button onclick="forgotPassword(4)">
+              <span>Redefinir</span>
+              <img class="image" src="./Imagens/next.png" alt="">
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="balao-login" id="mascot_1">
+    <b>Feliz em vê-lo <br> novamente.</b>
+    <img class="balao" src="./Imagens/balao.gif">
+  </div>
+  <div class="dog-login" id="mascot_2">
+    <img class="dog" src="./Imagens/mascote2.png">
+  </div>
+
+  <!-- Início do código relacionado ao footer -- João -->
+  <div class="footer">
+    <div class="container">
+      <div class="labels">
+        <div class="slogan">
+          <h1>VOCÊ <span class="text-pink"> IDEALIZA </span></h1>
+          <h1>A MIRACLE <span class="text-pink"> REALIZA </span></h1>
+        </div>
+        <div class="links">
+          <!-- <a href="">Suporte</a> <a href="">Privacidade</a> -->
+          <a href="contact.html">Fale Conosco</a>
+        </div>
+      </div>
+      <div class="labels">
+        <label>Tel.:(11) 5574-6844</label>
+        <label>E-mail: contato@miracle.com</label>
+        <label>Rua Haddock Lobo 595,</label>
+        <label>São Paulo, 01414-905</label>
+      </div>
+      <div class="labels">
+        <!-- <div class="sociais">
+          <img src="Imagens/socialmedia/icon-twiter/icons8-twitter-squared-64.svg" />
+          <img src="Imagens/socialmedia/icon-instagram/icons8-instagram-64.svg" />
+          <img src="Imagens/socialmedia/icon-facebook/icons8-facebook-64.svg" />
+        </div> -->
+        <div class="patente">
+          <img src="Imagens/bandeira-footer/icons8-brazil-40.svg" alt="" />
+          <label>© Miracle 2022</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fim do código relacionado ao footer -->
+</body>
+
+</html>
+<script>
+  //var inp_"nome do campo"
+  function entrar() {
+    inp_senha.style.border = "";
+    inp_email.style.border = "";
+    erroLogin.innerHTML = "";
+    var emailVar = inp_email.value;
+    var senhaVar = inp_senha.value;
+
+    if (emailVar.length < 1) {
+      inp_email.style.border = "2px solid red";
+      erroLogin.innerHTML = 'Email inválido';
+    }
+    if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1 ||
+      emailVar.indexOf("@") > emailVar.indexOf(".com")) {
+      inp_email.style.border = "2px solid red";
+      erroLogin.innerHTML = 'Email inválido';
+    }
+    if (senhaVar == "") {
+      inp_senha.style.border = "2px solid red";
+      erroLogin.innerHTML = 'Senha inválida';
+    }
+
+    if (
+      emailVar.length < 1 ||
+      senhaVar == "" ||
+      emailVar.indexOf("@") == -1 ||
+      emailVar.indexOf(".com") == -1 ||
+      emailVar.indexOf("@") > emailVar.indexOf(".com")
+    ) {
+      erroLogin.innerHTML = 'Email ou senha inválidos!';
+    }
+    else {
+      console.log("FORM LOGIN: ", emailVar);
+      console.log("FORM SENHA: ", senhaVar);
+      erroLogin.style.color = 'green';
+      erroLogin.innerHTML = 'Carregando...';
+      fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+        }),
+      })
+        .then(function (resposta) {
+          console.log("ESTOU NO THEN DO entrar()!");
+          if (resposta.ok) {
+            console.log(resposta);
+            resposta.json().then((json) => {
+              console.log(json);
+              console.log(JSON.stringify(json));
+              sessionStorage.ID_USUARIO = json.idUsuario;
+              sessionStorage.NOME_USUARIO = json.nomeUsuario;
+              sessionStorage.EMAIL_USUARIO = json.emailUsuario;
+              sessionStorage.CNPJ_USUARIO = json.CNPJ;
+              sessionStorage.FKEMPRESA_USUARIO = json.fkEmpresa
+
+              setTimeout(function () {
+                erroLogin.innerHTML = 'Login realizado com sucesso';
+              }, 2000);
+              setTimeout(function () {
+                window.location.href = "dashboard-principal.html";
+              }, 4000);
+
+            });
+          } else {
+            console.log("Houve um erro ao tentar realizar o login!");
+            erroLogin.innerHTML = "Houve um erro ao tentar realizar login";
+            return false;
+          }
+        })
+        .catch(function (erro) {
+          console.log(erro);
+        });
+      return false;
+    }
+  }
+
+  var idUser = 0;
+  var code = 0;
+
+  function forgotPassword(number) {
+    if (number == 1) {
+      document.getElementById('mascot_1').classList.add('card-hidden');
+      document.getElementById('mascot_2').classList.add('card-hidden');
+      document.getElementById('login').classList.add('card-hidden');
+      document.getElementById('forgot').classList.remove('card-hidden');
+    } else if (number == 2) {
+      code = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+      var email = inp_email_forgot.value;
+
+      erroForgot.style.color = 'blue';
+      erroForgot.innerHTML = 'Carregando...';
+
+      if (inp_count.style.display == 'inline') {
+        erroCode.style.color = 'blue';
+        erroCode.innerHTML = 'Enviando email novamente';
+      }
+
+      if (email == '') {
+        inp_email_forgot.style.border = '2px solid red'
+        erroForgot.style.color = 'red';
+        erroForgot.innerHTML = 'Insira um email para continuar';
+        return;
+      }
+
+      fetch(`/usuarios/getValidEmail/${email}`)
+        .then(function (resposta) {
+          if (resposta.ok) {
+            if (resposta.status == 204) {
+              erroForgot.innerHTML = 'Não existe nenhuma conta com esse email';
+              erroForgot.style.color = 'red';
+              throw "Nenhum resultado encontrado!!";
+            }
+
+            resposta.json().then(function (resposta) {
+              if (resposta.length == 0) {
+                erroForgot.innerHTML = 'Não existe nenhuma conta com esse email';
+                erroForgot.style.color = 'red';
+              } else {
+                idUser = resposta[0].idUsuario;
+
+                sendEmail(email, code);
+              }
+            });
+          } else {
+            throw "Houve um erro na API!";
+          }
+        })
+        .catch(function (resposta) {
+          console.error(resposta);
+        });
+    } else if (number == 3) {
+      if (inp_forgot_code.value == '') {
+        inp_forgot_code.style.border = '2px solid red';
+        erroCode.style.color = 'red';
+        erroCode.innerHTML = 'Insira um código para continuar';
+        return;
+      }
+
+      if (Number(inp_forgot_code.value) !== code) {
+        inp_forgot_code.style.border = '2px solid red';
+        erroCode.innerHTML = 'Código informado incorreto';
+        erroCode.style.color = 'red';
+      } else {
+        document.getElementById('code').classList.add('card-hidden');
+        document.getElementById('password').classList.remove('card-hidden');
+      }
+    } else if (number == 4) {
+      if (inp_forgot_new_password.value == '' || inp_forgot_new_password_confirmation.value == '') {
+        inp_forgot_new_password.style.border = '2px solid red';
+        inp_forgot_new_password_confirmation.style.border = '2px solid red';
+        erroPassword.innerHTML = 'Insira as duas senhas para continuar';
+        erroPassword.style.color = 'red';
+        return;
+      }
+      var newPassword = inp_forgot_new_password.value;
+      var newPasswordConfirmation = inp_forgot_new_password_confirmation.value;
+
+      if (newPassword !== newPasswordConfirmation) {
+        inp_forgot_new_password.style.border = '2px solid red';
+        inp_forgot_new_password_confirmation.style.border = '2px solid red';
+        erroPassword.innerHTML = 'As Senhas estão incorretas';
+        erroPassword.style.color = 'red';
+      } else {
+        updatePassword(newPassword);
+      }
+    }
+  }
+
+  function backStep(number) {
+    if (number == 1) {
+      document.getElementById('mascot_1').classList.remove('card-hidden');
+      document.getElementById('mascot_2').classList.remove('card-hidden');
+      document.getElementById('login').classList.remove('card-hidden');
+      document.getElementById('forgot').classList.add('card-hidden');
+    } else if (number == 2) {
+      document.getElementById('forgot').classList.remove('card-hidden');
+      document.getElementById('code').classList.add('card-hidden');
+    } else if (number == 3) {
+      document.getElementById('code').classList.remove('card-hidden');
+      document.getElementById('password').classList.add('card-hidden');
+    }
+  }
+
+  function sendEmail(email, code) {
+    fetch("/usuarios/sendEmailForgotPassword", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: email,
+        codeServer: code
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+        document.getElementById('forgot').classList.add('card-hidden');
+        document.getElementById('code').classList.remove('card-hidden');
+        if (inp_count.style.display == 'inline') {
+          erroCode.style.color = 'green';
+          erroCode.innerHTML = 'Email enviado novamente com sucesso!';
+        setTimeout(() => {
+          erroCode.innerHTML = '';
+        }, 3000);
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        erroForgot.innerHTML = 'Problemas para enviar o email, tente novamente.';
+        erroForgot.style.color = 'red';
+        erroCode.innerHTML = 'Problemas para enviar o email, tente novamente.';
+        erroCode.style.color = 'red';
+      });
+  }
+
+  function updatePassword(password) {
+    erroPassword.style.color = 'blue';
+    erroPassword.innerHTML = 'Carregando...';
+    fetch("/usuarios/updatePassword", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        passwordServer: password,
+        idUserServer: idUser
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+        window.alert('Senha Alterada com sucesso');
+        window.location.href = 'login.html'
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        erroPassword.innerHTML = 'Problemas alterar a senha';
+        erroPassword.style.color = 'red';
+      });
+  }
+
+  function resendEmail() {
+    time = 20;
+
+    inp_count.style.display = 'inline';
+    inp_resend.style.display = 'none';
+    regressiveCount();
+
+    forgotPassword(2);
+  }
+
+  var time = 20;
+
+  function regressiveCount() {
+    if(time == 0){
+      inp_resend.style.display = 'inline';
+      inp_count.style.display = 'none';
+      return;
+    }
+
+    inp_count.innerHTML = `Aguarde ${time} segundos`;
+
+    time--;
+
+    setTimeout(() => {
+      regressiveCount();
+    }, 1000);
+  }
+</script>

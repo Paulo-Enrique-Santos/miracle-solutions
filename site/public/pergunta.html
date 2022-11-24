@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miracle Solutions | Perguntas</title>
+    <link rel="stylesheet" href="CSS/loading.css">
+    <link rel="stylesheet" href="CSS/Estilo.css" />
+    <link rel="stylesheet" href="CSS/Style_maquinas.css" />
+    <link rel="stylesheet" href="CSS/pergunta.css">
+    <script src="JS/header.js"></script>
+</head>
+
+<body onload="validarSessao2(), exibirPergunta(sessionStorage.FKEMPRESA_USUARIO)">
+
+    <div class="headerPainel">
+        <div class="container">
+            <div class="usuarioLogin">
+                <img onclick="goDashboardPainel()" src="Imagens/pagina-usuario/icon-user/icons8-user-menu-male-128.svg">
+                <h1 onclick="goDashboardPainel()">Olá, <b id="id_nome" onclick="goDashboardPainel()">Fulano</b>.
+                </h1>
+            </div>
+            <div class="menuLogin">
+                <div class="iconeLogin">
+                    <img onclick="goDashboardPainel()" src="Imagens/icons-site/icons8-home-page-256.png">
+                    <label onclick="goDashboardPainel()">Home</label>
+                </div>
+                <div class="iconeLogin">
+                    <img onclick="goFuncionarioPainel()"
+                        src="Imagens/pagina-usuario/icon-funcionarios/icons8-name-tag-96.svg">
+                    <label onclick="goFuncionarioPainel()">Funcionários</label>
+                </div>
+                <div class="iconeLogin">
+                    <img onclick="goPerguntaPainel()" src="Imagens/icons-site/icons8-questions-256.svg">
+                    <label onclick="goPerguntaPainel()">Perguntas</label>
+                </div>
+            </div>
+            <div class="suporteSair">
+                <!-- <div class="iconeSuporteSair">
+                    <img onclick="goSuportePainel()"
+                        src="Imagens/pagina-usuario/icon-suporte/icons8-online-support-96.svg">
+                    <label onclick="goSuportePainel()">Suporte</label>
+                </div> -->
+                <div class="iconeSuporteSair">
+                    <img onclick="deslogar()" src="Imagens/botao-sair/icons8-logout-rounded-up-60.svg">
+                    <label onclick="deslogar()">Sair</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="txt_cadastrar">
+        <div class="box_txt">
+            <h1>Confira Todas as Perguntas Mensais</h1>
+        </div>
+    </div>
+
+    <div id="tabela" class="container_tabelas_pergunta">
+        <div class="tabela_pergunta">
+            <table id="tabela_pergunta">
+                <tr>
+                    <td class="td_curto">ID</td>
+                    <td class="td_grande">Pergunta</td>
+                    <td class="td_curto">Alterar</td>
+                    <td class="td_curto">Deletar</td>
+                </tr>
+            </table>
+            <div class="box-feedback-user" id="boxFeedback">
+                <span class="empty" id="empty">Você não possui nenhuma Pergunta Cadastrada!</span>
+                <div class="circle loading loading-user" id="loading"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="btnInserir" class="txt_cadastrar button_txt">
+        <div class="box_txt">
+            <a onclick="goToInsertNewQuestion()">INSERIR NOVA PERGUNTA</a>
+        </div>
+    </div>
+
+    <div id="alterar" class="modal">
+        <div class="modal-painel">
+            <div class="close">
+                <h1 class="alter-title">Editar pergunta</h1>
+            </div>
+            <div class="inputs">
+                <label>Pergunta selecionada para edição:</label>
+                <input id="selectedQuestion" type="text" disabled>
+                <label>Edite a pergunta selecionada abaixo:</label>
+                <input id="alterarQuestion" type="text">
+                <div id="erroAlter"></div>
+            </div>
+            <div class="button">
+                <button onclick="backByAlter()">VOLTAR</button>
+                <button onclick="alterQuestion()">EDITAR</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="inserir" class="modal-insert">
+        <div class="modal-painel">
+            <div class="close">
+                <h1 class="alter-title">Inserir pergunta</h1>
+            </div>
+            <div class="inputs">
+                <label>Escreva uma nova pergunta abaixo:</label>
+                <input id="insertQuestion" type="text">
+                <div id="erroInsert"></div>
+            </div>
+            <div class="button">
+                <button onclick="backByInsert()">VOLTAR</button>
+                <button onclick="insertNewQuestion()">INSERIR</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    function exibirPergunta(fkEmpresa) {
+        fetch(`/avisos/exibirPergunta/${fkEmpresa}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    loading.style.display = 'none';
+                    empty.style.display = 'block';
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        var tr = document.createElement("tr");
+                        var td1 = document.createElement("td");
+                        var td2 = document.createElement('td');
+                        var td3 = document.createElement('td');
+                        var td4 = document.createElement('td');
+                        var edit = document.createElement("img");
+                        var trash = document.createElement("img");
+
+                        td3.appendChild(edit);
+                        td4.appendChild(trash);
+
+                        var loading = document.createElement('div');
+                        loading.classList.add('circle');
+                        loading.classList.add('loading');
+                        loading.id = 'loading-' + publicacao.idPergunta;
+
+                        td4.appendChild(loading);
+
+                        td1.innerHTML = publicacao.idPergunta;
+                        td2.innerHTML = publicacao.pergunta;
+
+                        edit.src =
+                            "Imagens/edit.png";
+                        edit.className = "icon";
+                        edit.setAttribute(
+                            "onclick",
+                            `setEditPerg(${publicacao.idPergunta})`
+                        );
+
+                        trash.src =
+                            "Imagens/delete.png";
+                        trash.className = "icon";
+                        trash.setAttribute(
+                            "onclick",
+                            `deletePergById(${publicacao.idPergunta})`
+                        );
+                        trash.id = 'trash-' + publicacao.idPergunta;
+
+
+                        td1.className = "td";
+                        td2.className = "td";
+                        td3.className = "td";
+                        td4.className = "td";
+
+                        td2.id = "pergunta-" + publicacao.idPergunta;
+                        td3.id = "edit-" + publicacao.idPergunta;
+
+                        tabela_pergunta.appendChild(tr);
+                        tr.appendChild(td1);
+                        tr.appendChild(td2);
+                        tr.appendChild(td3);
+                        tr.appendChild(td4);
+                    }
+                }
+                );
+                boxFeedback.style.display = 'none'
+                loading.style.display = 'none';
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+    }
+
+    function goToInsertNewQuestion() {
+        btnInserir.style.display = "none";
+        tabela.style.display = "none";
+        inserir.style.display = "flex";
+    }
+
+    function backByInsert() {
+        btnInserir.style.display = "flex";
+        tabela.style.display = "flex";
+        inserir.style.display = "none";
+        insertQuestion.value = "";
+        erroInsert.innerHTML = "";
+    }
+
+    function setEditPerg(idPergunta) {
+        btnInserir.style.display = "none";
+        tabela.style.display = "none";
+        alterar.style.display = "flex";
+
+        let pergunta = document.getElementById('pergunta-' + idPergunta);
+        selectedQuestion.value = pergunta.innerText;
+        sessionStorage.ID_PERGUNTA = idPergunta;
+    }
+
+    function backByAlter() {
+        btnInserir.style.display = "flex";
+        tabela.style.display = "flex";
+        alterar.style.display = "none";
+        alterQuestion.value = "";
+        erroAlter.innerHTML = "";
+    }
+
+    function insertNewQuestion() {
+        // PARAMETRIZANDO VARIÁVEIS
+        var perguntaVar = insertQuestion.value;
+        var empresaVar = sessionStorage.FKEMPRESA_USUARIO;
+
+        if (perguntaVar.length < 2 || perguntaVar.length > 90) {
+            erroInsert.style.color = "red";
+            erroInsert.innerHTML = "Digite no mínimo 2 e no máximo 90 caracteres"
+        }
+        else {
+
+            fetch("/avisos/insertNewQuestion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    perguntaServer: perguntaVar,
+                    empresaServer: empresaVar,
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+                        erroInsert.style.color = 'green';
+                        erroInsert.innerHTML = 'Pergunta inserida com sucesso';
+                        setTimeout(function () {
+                            erroInsert.innerHTML = 'Carregando...';
+                        }, 2000);
+                        setTimeout(function () {
+                            window.location.href = "pergunta.html";
+                        }, 4000);
+                    } else {
+                        erroInsert.style.color = "red";
+                        erroInsert.innerHTML = "Houve um erro ao inserir pergunta";
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+
+            return false;
+        }
+    }
+
+    function deletePergById(idPergunta) {
+        // PARAMETRIZANDO VARIÁVEIS
+        let loading = document.getElementById('loading-' + idPergunta);
+        let trash = document.getElementById('trash-' + idPergunta);
+
+        trash.style.display = 'none';
+        loading.style.display = 'block';
+
+        fetch(`/avisos/deletePergById/${idPergunta}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    setTimeout(function () {
+                        window.location.href = "pergunta.html";
+                    }, 2000);
+                } else {
+                    trash.style.display = 'initial';
+                    loading.style.display = 'none';
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+
+    function alterQuestion() {
+        // PARAMETRIZANDO VARIÁVEIS
+        var idPerguntaVar = sessionStorage.ID_PERGUNTA;
+        var perguntaVar = alterarQuestion.value;
+
+        fetch("/avisos/alterQuestion", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idPerguntaServer: idPerguntaVar,
+                perguntaServer: perguntaVar
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    erroAlter.style.color = 'green';
+                    erroAlter.innerHTML = 'Pergunta alterada com sucesso';
+                    setTimeout(function () {
+                        erroInsert.innerHTML = 'Carregando...';
+                    }, 2000);
+                    setTimeout(function () {
+                        window.location.href = "pergunta.html";
+                    }, 4000);
+                } else {
+                    erroAlter.style.color = "red";
+                    erroAlter.innerHTML = "Houve um erro ao alterar pergunta";
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+
+</script>

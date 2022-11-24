@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miracle Solutions | Tela de Funcionários</title>
+    <link rel="stylesheet" href="CSS/loading.css">
+    <link rel="stylesheet" href="CSS/Estilo.css" />
+    <link rel="stylesheet" href="CSS/Style-tela-funcionario.css">
+    <script src="JS/header.js"></script>
+</head>
+
+<body
+    onload="validarSessao2(),atualizarFuncionarios(sessionStorage.ID_USUARIO)">
+    <div class="headerPainel">
+        <div class="container">
+            <div class="usuarioLogin">
+                <img onclick="goDashboardPainel()" src="Imagens/pagina-usuario/icon-user/icons8-user-menu-male-128.svg">
+                <h1 onclick="goDashboardPainel()">Olá, <b id="id_nome" onclick="goDashboardPainel()">Fulano</b>.
+                </h1>
+            </div>
+            <div class="menuLogin">
+                <div class="iconeLogin">
+                    <img onclick="goDashboardPainel()"
+                        src="Imagens/icons-site/icons8-home-page-256.png">
+                    <label onclick="goDashboardPainel()">Home</label>
+                </div>
+                <div class="iconeLogin">
+                    <img onclick="goFuncionarioPainel()"
+                        src="Imagens/pagina-usuario/icon-funcionarios/icons8-name-tag-96.svg">
+                    <label onclick="goFuncionarioPainel()">Funcionários</label>
+                </div>
+                <div class="iconeLogin">
+                    <img onclick="goPerguntaPainel()" src="Imagens/icons-site/icons8-questions-256.svg">
+                    <label onclick="goPerguntaPainel()">Perguntas</label>
+                </div>
+            </div>
+            <div class="suporteSair">
+                <!-- <div class="iconeSuporteSair">
+                    <img onclick="goSuportePainel()"
+                        src="Imagens/pagina-usuario/icon-suporte/icons8-online-support-96.svg">
+                    <label onclick="goSuportePainel()">Suporte</label>
+                </div> -->
+                <div class="iconeSuporteSair">
+                    <img onclick="deslogar()" src="Imagens/botao-sair/icons8-logout-rounded-up-60.svg">
+                    <label onclick="deslogar()">Sair</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="txt_cadastrar">
+        <div class="box_txt">
+            <h1>Lista de Funcionários da Empresa</h1>
+        </div>
+    </div>
+    <div class="container_tabelas_Funcionarios">
+        <div class="tabela_Funcionarios">
+            <table id="tabela_funcionarios">
+                <tr>
+                    <td class="td_normal">
+                        Nome
+                    </td>
+                    <td class="td_normal">
+                        Cargo
+                    </td>
+                    <td class="td_curto">
+                        <span>Satisfação</span>
+                        <a>
+                            <div class="box answer">
+                                <label class="explic">Essa é a Satisfação do Funcionário baseado na pesquisa mensal</label>
+                                <label class="label">Legenda:</label>
+                                <div class="cores">
+                                    <div class="bola_red"></div>
+                                    <label> - Abaixo de 50% </label>
+                                </div>
+                                <div class="cores">
+                                    <div class="bola_yellow"></div>
+                                    <label> - De 50% a 80% </label>
+                                </div>
+                                <div class="cores">
+                                    <div class="bola_green"></div>
+                                    <label> - Acima de 80% </label>
+                                </div>
+                            </div>                
+                            <img src="./Imagens/duvida.png" alt="">
+                        </a>
+                    </td>
+                    <td class="td_curto">
+                        Editar
+                    </td>
+                    <td class="td_curto">
+                        Remover
+                    </td>
+                </tr>
+            </table>
+            <div class="box-feedback-user" id="boxFeedback">
+                <span class="empty" id="empty">Você não possui nenhum Funcionário!</span>
+                <div class="circle loading loading-user" id="loading"></div>
+            </div >
+        </div>
+    </div>
+    <div class="txt_cadastrar button_txt">
+        <div class="box_txt">
+            <a href="Cadastro_usuario.html">CADASTRAR NOVO FUNCIONÁRIO</a>
+        </div>
+    </div>
+     <!-- Start of miraclesolutionshelp Zendesk Widget script -->
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=9189050c-e509-4e10-941b-ba933f8811aa"> </script>
+<!-- End of miraclesolutionshelp Zendesk Widget script -->
+</body>
+
+</html>
+
+<script>
+
+    var verificarFuncionario;
+
+    function atualizarFuncionarios(fkUsuario) {
+        fetch(`/usuarios/listarFuncionarios/${fkUsuario}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    loading.style.display = 'none';
+                    empty.style.display = 'block';
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var horasApontadas = 0;
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        var tr = document.createElement("tr");
+                        var td1 = document.createElement("td");
+                        var td3 = document.createElement("td");
+                        var td4 = document.createElement("td");
+                        var td5 = document.createElement('td');
+                        var td6 = document.createElement('td');
+                        var edit = document.createElement("img");
+                        var trash = document.createElement("img");
+
+                        td5.appendChild(edit);
+                        td6.appendChild(trash);
+
+                        var loading = document.createElement('div');
+                        loading.classList.add('circle');
+                        loading.classList.add('loading');
+                        loading.id = 'loading-' + publicacao.idUsuario;
+
+                        td6.appendChild(loading);
+
+                        td1.innerHTML = publicacao.nome;
+                        td3.innerHTML = publicacao.cargo;
+                        td4.innerHTML = 0;
+                        edit.src =
+                            "Imagens/edit.png";
+                        edit.className = "icon";
+                        edit.setAttribute(
+                            "onclick",
+                            `setEditFunc(${publicacao.idUsuario})`
+                        );
+
+                        trash.src =
+                            "Imagens/delete.png";
+                        trash.className = "icon";
+                        trash.setAttribute(
+                            "onclick",
+                            `deleteFuncById(${publicacao.idUsuario})`
+                        );
+                        trash.id = 'trash-' + publicacao.idUsuario;
+
+
+                        td1.className = "td";
+                        td3.className = "td";
+                        td4.className = "td";
+                        td5.className = "td";
+                        td6.className = "td";
+
+                        td4.id = "pesquisaUsuario" + publicacao.emailUsuario;
+
+                        tabela_funcionarios.appendChild(tr);
+                        tr.appendChild(td1);
+                        tr.appendChild(td3);
+                        tr.appendChild(td4);
+                        tr.appendChild(td5);
+                        tr.appendChild(td6);
+                    }
+                }
+                );
+                atualizarPesquisa(sessionStorage.ID_USUARIO);
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+    }
+
+    function atualizarPesquisa(idUsuario) {
+
+        fetch(`/usuarios/atualizarPesquisa/${idUsuario}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        var nota = document.getElementById("pesquisaUsuario" + publicacao.emailUsuario);
+                        console.log(nota);
+                        if (publicacao.notaTotal < 50) {
+                            nota.className = "red";
+                        } else if (publicacao.notaTotal < 80) {
+                            nota.className = "yellow";
+                        } else {
+                            nota.className = "green";
+                        }
+                        nota.style.textAlign = "center";
+                        if (publicacao.notaTotal != null) {
+                            nota.innerHTML = publicacao. notaTotal + "%";
+                        } else {
+                            nota.innerHTML = 'Sem Pesquisa';
+                        }
+                    }
+                });
+                boxFeedback.style.display = 'none';
+                loading.style.display = 'none';
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+
+    function deleteFuncById(idUsuario) {
+        let loading = document.getElementById('loading-' + idUsuario);
+        let trash = document.getElementById('trash-' + idUsuario);
+
+        trash.style.display = 'none';
+        loading.style.display = 'block';
+
+        fetch(`/avisos/deleteFuncById/${idUsuario}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                window.alert("Funcionário Deletado com Sucesso!");
+                window.location = "Tela-funcionarios.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+                trash.style.display = 'initial';
+                loading.style.display = 'none';
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function setEditFunc(number) {
+        sessionStorage.setItem('editFuncionarioId', number);
+
+        window.location.href = 'Cadastro_usuario.html'
+    }
+</script>

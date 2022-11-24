@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miracle Solutions | Dashboard</title>
+    <link rel="stylesheet" href="CSS/dashboard-principal.css">
+    <link rel="stylesheet" href="CSS/Estilo.css">
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script src="JS/header.js"></script>
+    <script src="./JS/dashboard-principal.js"></script>
+</head>
+
+<body class="dev" onload="validarSessao(),getIdMaquinas(sessionStorage.ID_USUARIO)">
+    <div class="headerPainel">
+        <div class="container">
+            <div class="usuarioLogin">
+                <img onclick="goDashboardPainel()" src="Imagens/pagina-usuario/icon-user/icons8-user-menu-male-128.svg">
+                <h1 onclick="goDashboardPainel()">Olá, <b id="id_nome" onclick="goDashboardPainel()">Fulano</b>.
+                </h1>
+            </div>
+            <div class="menuLogin">
+                <div class="iconeLogin">
+                    <img onclick="goDashboardPainel()" src="Imagens/icons-site/icons8-home-page-256.png">
+                    <label onclick="goDashboardPainel()">Home</label>
+                </div>
+                <div class="iconeLogin">
+                    <img onclick="goFuncionarioPainel()"
+                        src="Imagens/pagina-usuario/icon-funcionarios/icons8-name-tag-96.svg">
+                    <label onclick="goFuncionarioPainel()">Funcionários</label>
+                </div>
+                <div class="iconeLogin">
+                    <img onclick="goPerguntaPainel()" src="Imagens/icons-site/icons8-questions-256.svg">
+                    <label onclick="goPerguntaPainel()">Perguntas</label>
+                </div>
+            </div>
+            <div class="suporteSair">
+                <!-- <div class="iconeSuporteSair">
+                    <img onclick="goSuportePainel()"
+                        src="Imagens/pagina-usuario/icon-suporte/icons8-online-support-96.svg">
+                    <label onclick="goSuportePainel()">Suporte</label>
+                </div> -->
+                <div class="iconeSuporteSair">
+                    <img onclick="deslogar()" src="Imagens/botao-sair/icons8-logout-rounded-up-60.svg">
+                    <label onclick="deslogar()">Sair</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tela">
+        <div class="container-grafc">
+            <div class="dashboard">
+                <h3 class="infoGeral">Desempenho Geral das Máquinas</h3>
+                <!-- <button onclick="gerarRelatorio()" style="visibility: hidden;" class="btnGerarRelatorio">
+                    Gerar relatório
+                </button> -->
+                <div class="graficos">
+                    <div class="card-maquinas">
+                        <div class="title">
+                            <h1>Perigo</h1>
+                            <a>
+                                <div class="box answer">
+                                    <label class="explic">
+                                        Algum componente da máquina está acima de 80% de utilização
+                                    </label>
+                                </div>
+                                <img src="./Imagens/duvida.png" alt="">
+                            </a>
+                        </div>
+                        <div class="circle warning" id="dataWarning">
+                            <h1 id="lengthWarning"> 17 </h1>
+                        </div>
+                        <div class="circle loading" id="loadingWarning">
+                        </div>
+                        <button id="buttonWarning" disabled onclick="goMaquinaPainel('warning')">Detalhes</button>
+                    </div>
+                    <div class="card-maquinas">
+                        <div class="title">
+                            <h1>Alerta</h1>
+                            <a>
+                                <div class="box answer">
+                                    <label class="explic">
+                                        Algum componente da máquina está entre 80% e 20% de utilização
+                                    </label>
+                                </div>
+                                <img src="./Imagens/duvida.png" alt="">
+                            </a>
+                        </div>
+
+                        <div class="circle alert" id="dataAlert">
+                            <h1 id="lengthAlert"> 17 </h1>
+                        </div>
+                        <div class="circle loading" id="loadingAlert">
+                        </div>
+                        <button id="buttonAlert" disabled onclick="goMaquinaPainel('alert')">Detalhes</button>
+                    </div>
+                    <div class="card-maquinas">
+                        <div class="title">
+                            <h1>Estável</h1>
+                            <a>
+                                <div class="box answer">
+                                    <label class="explic">
+                                        Todos os componentes da máquina estão abaixo de 20% de utilização
+                                    </label>
+                                </div>
+                                <img src="./Imagens/duvida.png" alt="">
+                            </a>
+                        </div>
+
+                        <div class="circle good" id="dataGood">
+                            <h1 id="lengthGood"> 17 </h1>
+                        </div>
+                        <div class="circle loading" id="loadingGood">
+                        </div>
+                        <button id="buttonGood" disabled onclick="goMaquinaPainel('good')">Detalhes</button>
+                    </div>
+
+                    <!-- <div class="box-grafc">
+                        <h3 class="grafH3">
+                            Ocorrências de Maquinas
+                            <select class="selectGraf" id="slc_Ocorrencias" onchange="obterDadosGraficoOcorrencias(sessionStorage.ID_USUARIO)" id="selectGrafico">
+                                <option value="7">Semanal</option>
+                                <option value="30">Mensal</option>
+                            </select>
+                        </h3>
+                        <div class="divGrafico">
+                            <canvas id="GraficoOcorrencias"></canvas>
+                        </div>
+                    </div>
+                    <div class="box-grafc">
+                        <h3 class="grafH3">
+                            Apontamento de Horas
+                            <select class="selectGraf slc_apont" id="selectGrafico">
+                                <option value="diario">Diário</option>
+                                <option value="mensal">Mensal</option>
+                            </select>
+                        </h3>
+                        <div class="divGrafico">
+                            <canvas id="GraficoApontamento"></canvas>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <hr class="linha-avisos">
+            <div class="div-avisos" id="div_avisos">
+                <h3 class="alerta">ALERTAS</h3>
+                <!-- <div class="avisos">
+                    <p id="alert">Todas as máquinas estão com desempenho adequado</p>
+                </div> -->
+                <!-- <div class="div-pendencias">
+                    <h4 class="pendencias">PENDÊNCIAS</h4>
+                    <ul class="ul_funcionarios" id="spn_funcionarios"><ul>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- Start of miraclesolutionshelp Zendesk Widget script -->
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=9189050c-e509-4e10-941b-ba933f8811aa"> </script>
+<!-- End of miraclesolutionshelp Zendesk Widget script -->
+</body>
+
+</html>

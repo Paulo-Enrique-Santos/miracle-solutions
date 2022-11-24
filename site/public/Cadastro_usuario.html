@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miracle Solutions | Cadastrar Usuário</title>
+
+  <link rel="stylesheet" href="CSS/loading.css">
+  <link rel="stylesheet" href="CSS/Estilo.css" />
+  <link rel="stylesheet" href="CSS/usuario.css" />
+  <link rel="stylesheet" href="CSS/generic-card.css">
+
+  <script src="JS/header.js"></script>
+</head>
+
+<body onload="validarSessao(), getEditUser()">
+  <div class="headerPainel">
+    <div class="container">
+      <div class="usuarioLogin">
+        <img onclick="goDashboardPainel()" src="Imagens/pagina-usuario/icon-user/icons8-user-menu-male-128.svg">
+        <h1 onclick="goDashboardPainel()">Olá, <b id="id_nome" onclick="goDashboardPainel()">Fulano</b>.
+        </h1>
+      </div>
+      <div class="menuLogin">
+        <div class="iconeLogin">
+          <img onclick="goDashboardPainel()" src="Imagens/icons-site/icons8-home-page-256.png">
+          <label onclick="goDashboardPainel()">Home</label>
+        </div>
+        <div class="iconeLogin">
+          <img onclick="goFuncionarioPainel()" src="Imagens/pagina-usuario/icon-funcionarios/icons8-name-tag-96.svg">
+          <label onclick="goFuncionarioPainel()">Funcionários</label>
+        </div>
+        <div class="iconeLogin">
+          <img onclick="goPerguntaPainel()" src="Imagens/icons-site/icons8-questions-256.svg">
+          <label onclick="goPerguntaPainel()">Perguntas</label>
+        </div>
+      </div>
+      <div class="suporteSair">
+        <!-- <div class="iconeSuporteSair">
+          <img onclick="goSuportePainel()" src="Imagens/pagina-usuario/icon-suporte/icons8-online-support-96.svg">
+          <label onclick="goSuportePainel()">Suporte</label>
+        </div> -->
+        <div class="iconeSuporteSair">
+          <img onclick="deslogar()" src="Imagens/botao-sair/icons8-logout-rounded-up-60.svg">
+          <label onclick="deslogar()">Sair</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Começo pagina cadastro usuario -- Wlad -->
+
+  <div class="container">
+    <div class="circle loading loading-user" id="loading"></div>
+    <div class="generic-card card-hidden" id="form">
+      <div class="box-titles">
+        <h1 class="title" id="title">Cadastre</h1>
+        <h3 class="sub-title" id="subtitle">Informe os dados para acesso do Funcionário</h3>
+      </div>
+      <div class="box-large">
+        <div class="card-inputs">
+          <div class="box-input">
+            <label for="">Nome:</label>
+            <input type="text" placeholder="João" id="inp_nome" />
+          </div>
+          <div class="box-input">
+            <label for="">Email:</label>
+            <input type="text" placeholder="joaodasilva@miraclesolution.com" id="inp_email">
+          </div>
+          <div class="box-input">
+            <label for="">Senha:</label>
+            <input type="password" placeholder="*********" id="inp_senha">
+          </div>
+        </div>
+        <div class="card-inputs">
+          <div class="box-input">
+            <label for="">Sobrenome:</label>
+            <input type="text" placeholder="Da Silva" id="inp_sobrenome">
+          </div>
+          <div class="box-input">
+            <label for="">Cargo:</label>
+            <select name="cargo" id="combo_box">
+              <option value="nulo" selected>Selecione o cargo</option>
+              <option value="Administrador de BD">Administrador de BD</option>
+              <option value="Analista de QA">Analista de QA</option>
+              <option value="Analista de Segurança">Analista de Segurança</option>
+              <option value="Administrador de Redes">Administrador de Redes</option>
+              <option value="Desenvolvedor Back-End">Desenvolvedor Back-End</option>
+              <option value="Desenvolvedor Front-End">
+                Desenvolvedor Front-End
+              </option>
+              <option value="Desenvolvedor Mobile">Desenvolvedor Mobile</option>
+              <option value="Estagiário">Estagiário</option>
+              <option value="Suporte técnico">Suporte técnico</option>
+            </select>
+          </div>
+          <div class="box-input">
+            <label for="">Confirme a Senha:</label>
+            <input type="password" placeholder="*********" id="inp_confirmar_senha">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="box-erro">
+          <span class="label-erro" id="erro3"></span>
+        </div>
+        <div class="box-buttons box-double-buttons">
+          <button class="button-back" onclick="backStep()">
+            <span class="font-size">Voltar</span>
+          </button>
+          <button class="button" onclick="CadastrarUser()">
+            <span class="font-size" id="buttonName">Cadastrar</span>
+            <img src="./Imagens/botao-cadastrar-login/icons8-enter-128.svg" alt="">
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="box">
+      <input type="text" id="inp_nome" class="input_pg_usuario" placeholder="Nome" />
+      <input type="text" id="inp_sobrenome" class="input_pg_usuario" placeholder="Sobrenome" />
+      <select name="cargo" id="combo_box" class="CB_cadastro">
+        <option value="nulo">Selecione o cargo</option>
+        <option value="Administrador de BD">Administrador de BD</option>
+        <option value="Analista de QA">Analista de QA</option>
+        <option value="Analista de Segurança">Analista de Segurança</option>
+        <option value="Administrador de Redes">Administrador de Redes</option>
+        <option value="Desenvolvedor Back-End">Desenvolvedor Back-End</option>
+        <option value="Desenvolvedor Front-End">
+          Desenvolvedor Front-End
+        </option>
+        <option value="Desenvolvedor Mobile">Desenvolvedor Mobile</option>
+        <option value="Estagiário">Estagiário</option>
+        <option value="Suporte técnico">Suporte técnico</option>
+      </select>
+      <input type="email" id="inp_email" class="input_pg_usuario" placeholder="E-mail" />
+      <input type="password" id="inp_senha" class="input_pg_usuario" placeholder="Senha" />
+      <input type="password" id="inp_confirmar_senha" class="input_pg_usuario" placeholder="Confirmar Senha" />
+      <div id="erro3"></div>
+    </div>
+    <div class="box_btn_entrar">
+      <img src="Imagens/botao-cadastrar-login/icons8-enter-128.svg" onclick="CadastrarUser()" />
+      <div class="txt_entrar">Cadastrar</div>
+    </div> -->
+  </div>
+  <!-- Fim da pagina cadastro usuario -- Wlad -->
+  <!-- Início do código relacionado ao footer -- João -->
+  <!-- Fim do código relacionado ao footer -->
+</body>
+
+</html>
+<script src="./JS/cadastrarUser.js"></script>
+<script src="JS/edit-user.js"></script>

@@ -1,0 +1,176 @@
+.infoMaquinas .container {
+    display: flex;
+    flex-direction: row;
+    height: 518px;
+}
+
+.infoMaquinas .container .dashboardIndividual{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 75%;
+    border-right: 4px solid #7E7878;
+}
+
+.infoMaquinas .container .listarComponentes {
+    height: 100%;
+    width: 25%;
+    border-left: 4px solid #7E7878;
+}
+
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 75%;
+}
+
+.computador{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 25%;
+    width: 80%;
+    background-color: #CBCACA;
+    border: 4px solid #CBCACA;
+}
+
+.dashboardComponentes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 80%;
+    border: 4px solid #CBCACA;
+}
+
+#maquina_individual{
+    height: 300px;
+    width: 100%;
+}
+
+.dados{
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 25%;
+}
+
+.boxDados{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 45%;
+    width: 100%;
+}
+
+.boxDados b{
+    width: 30%;
+}
+
+.metricas{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 30%;
+    width: 100%;
+    border: 1px solid #7E7878;
+}
+
+.metricas h3{
+    display: flex;
+    margin-top: 0;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.metrica{
+    display: flex;
+    flex-direction: row;
+}
+
+.metrica label{
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.bola1, .bola2, .bola3{
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.bola1{
+    background-color: red;
+}
+
+.bola2{
+    background-color: orange;
+}
+
+.bola3{
+    background-color: #7AF866;
+}
+
+.boxDados .componente{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
+    height: 25%;
+    width: 100%;
+    background-color: #7AF866;
+    border: 2px solid #7E7878;
+    cursor: pointer;
+}
+
+.listarComponentes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.listarComponentes h2{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.listarComponentes .componentes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 20%;
+    width: 85%;
+}
+
+.relatorio{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 20%;
+    width: 100%;
+}
+
+.purple{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 30%;
+    width: 52%;
+    font-weight: bolder;
+    background-color: #C989D2;
+    border: 1px solid #7E7878;
+    border-radius: 5px;
+}

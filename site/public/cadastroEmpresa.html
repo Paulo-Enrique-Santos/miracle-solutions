@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miracle Solutions | Cadastre-se</title>
+  <link rel="stylesheet" href="CSS/cadastroEmpresa.css" />
+  <link rel="stylesheet" href="CSS/generic-card.css">
+  <link rel="stylesheet" href="./CSS/Estilo.css">
+  <script src="JS/header.js"></script>
+</head>
+
+<body>
+  <!-- Código relacionado ao header -- João -->
+
+  <div class="header">
+    <div class="container">
+      <div class="navbar-tittle">
+        <img onclick="goHome()" src="Imagens/logo-empresa/icons8-artificial-intelligence-90.svg" />
+        <h1 onclick="goHome()" class="logoPurple">MIRACLE</h1>
+        <h1 onclick="goHome()" class="logo">SOLUTIONS</h1>
+      </div>
+      <div class="navbar">
+        <div id="menu" class="menu-responsivo">
+          <a href="cadastroEmpresa.html">Cadastrar</a>
+          <a href="login.html">Entrar</a>
+        </div>
+        <button onclick="goSignUp()">Cadastrar</button>
+        <img onclick="openMenu()" class="header-menu" src="Imagens/icon-menu/icons8-menu-96.svg" />
+        <div class="btnLogin">
+          <img onclick="goLogin()" src="Imagens/botao-entrar/icons8-login-64.svg" />
+          <a href="login.html">Entrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fim do código relacionado ao header -->
+
+  <!-- Início do código relacionado a tela de cadastro -- Marte -->
+
+  <div class="telaCadastro">
+    <div class="containerCadastro">
+
+      <!-- TIME LINE -->
+
+      <div class="time-line">
+        <div class="step">
+          <div class="ball here" id="step-1-ball-time-line"></div>
+          <span class="title">Dados Empresa</span>
+        </div>
+        <div class="line" id="step-1-line-time-line"></div>
+        <div class="step">
+          <div class="ball" id="step-2-ball-time-line"></div>
+          <span class="title">Dados Endereço</span>
+        </div>
+        <div class="line" id="step-2-line-time-line"></div>
+        <div class="step">
+          <div class="ball" id="step-3-ball-time-line"></div>
+          <span class="title">Dados <br> Acesso</span>
+        </div>
+      </div>
+
+      <!-- STEP 1 CADASTRO -->
+
+      <div class="generic-card" id="step-1">
+        <div class="box-titles">
+          <h1 class="title">Cadastre-se</h1>
+          <h3 class="sub-title">Informe os dados da sua empresa</h3>
+        </div>
+        <div class="card-inputs">
+          <div class="box-input">
+            <label for="">Nome Empresa:</label>
+            <input type="text" placeholder="Miracle Solutions" onkeyup="maskInputs(1)" id="nomeEmpresa_id">
+          </div>
+          <div class="box-input">
+            <label for="">CNPJ:</label>
+            <input type="text" placeholder="00.000.000/0000-00" id="cnpj_id" onkeyup="maskInputs(1)" maxlength="14">
+          </div>
+          <div class="box-input">
+            <label for="">Número Telefone:</label>
+            <input type="text" placeholder="(11) 4002-8922" id="telefone_id" onkeyup="maskInputs(1)" maxlength="10">
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="box-erro">
+            <span class="label-erro" id="erro"></span>
+          </div>
+          <div class="box-buttons box-double-buttons continue-button">
+            <button class="button-back hidden-button">
+              <img src="./Imagens/botao-cadastrar-login/icons8-enter-128.svg" alt="">
+              <span class="font-size">Voltar</span>
+            </button>
+            <button class="button" onclick="validatorsStep(1)">
+              <span class="font-size">Continuar</span>
+              <img class="image" src="./Imagens/next.png" alt="">
+            </button>
+          </div>
+          <div class="box-redirect">
+            <span>Já possui uma conta? <a href="login.html">Faça Login</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 CADASTRO -->
+
+      <div class="generic-card card-hidden" id="step-2">
+        <div class="box-titles">
+          <h1 class="title">Cadastre-se</h1>
+          <h3 class="sub-title">Informe o endereço da sua empresa</h3>
+        </div>
+        <div class="box-large">
+          <div class="card-inputs">
+            <div class="box-input">
+              <label for="">CEP:</label>
+              <input type="text" id="cep_id" placeholder="01001-000" onkeyup="maskInputs(2)" maxlength="9">
+            </div>
+            <div class="box-input">
+              <label for="">Cidade:</label>
+              <input type="cnpj" disabled onkeyup="maskInputs()" id="cidade_id">
+            </div>
+            <div class="box-input">
+              <label for="">Bairro:</label>
+              <input type="text" disabled onkeyup="maskInputs()" id="bairro_id">
+            </div>
+          </div>
+          <div class="card-inputs">
+            <div class="box-input">
+              <label for="">Estado:</label>
+              <input type="text" disabled onkeyup="maskInputs()" id="estado_id">
+            </div>
+            <div class="box-input">
+              <label for="">Endereço:</label>
+              <input type="cnpj" disabled onkeyup="maskInputs()" id="logradouro_id">
+            </div>
+            <div class="box-input">
+              <label for="">Número:</label>
+              <input type="text" placeholder="595" onkeyup="maskInputs(2)" maxlength="10" id="numero_id">
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="box-erro">
+            <span class="label-erro" id="erro2"></span>
+          </div>
+          <div class="box-buttons box-double-buttons">
+            <button class="button-back" onclick="backStep(1)">
+              <img class="image" src="./Imagens/previus.png" alt="">
+              <span class="font-size">Voltar</span>
+            </button>
+            <button class="button" onclick="validatorsStep(2)">
+              <span class="font-size">Continuar</span>
+              <img class="image" src="./Imagens/next.png" alt="">
+            </button>
+          </div>
+          <div class="box-redirect">
+            <span>Já possui uma conta? <a href="login.html">Faça Login</a></span>
+          </div>
+        </div>
+      </div>
+      <!-- STEP 3 CADASTRO -->
+
+      <div class="generic-card card-hidden" id="step-3">
+        <div class="box-titles">
+          <h1 class="title">Cadastre-se</h1>
+          <h3 class="sub-title">Informe seus dados de acesso</h3>
+        </div>
+        <div class="box-large">
+          <div class="card-inputs">
+            <div class="box-input">
+              <label for="">Nome:</label>
+              <input type="text" placeholder="João" id="nome_id" onkeyup="maskInputs()" />
+            </div>
+            <div class="box-input">
+              <label for="">Email:</label>
+              <input type="text" placeholder="joaodasilva@miraclesolution.com" id="email_id" onkeyup="maskInputs()">
+            </div>
+            <div class="box-input">
+              <label for="">Senha:</label>
+              <input type="password" placeholder="*********" id="senha_id" onkeyup="maskInputs()">
+            </div>
+          </div>
+          <div class="card-inputs">
+            <div class="box-input">
+              <label for="">Sobrenome:</label>
+              <input type="text" placeholder="Da Silva" id="sobrenome_id" onkeyup="maskInputs()">
+            </div>
+            <div class="box-input">
+              <label for="">Confrime o Email:</label>
+              <input type="cnpj" placeholder="joaodasilva@miraclesolution.com" id="confirmarEmail_id"
+                onkeyup="maskInputs()">
+            </div>
+            <div class="box-input">
+              <label for="">Confirme a Senha:</label>
+              <input type="password" placeholder="*********" id="confirmarSenha_id" onkeyup="maskInputs()">
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="box-erro">
+            <span class="label-erro" id="erro3"></span>
+          </div>
+          <div class="box-buttons box-double-buttons">
+            <button class="button-back" onclick="backStep(2)">
+              <img class="image" src="./Imagens/previus.png" alt="">
+              <span class="font-size">Voltar</span>
+            </button>
+            <button class="button" onclick="validatorsStep()">
+              <span class="font-size">Cadastrar</span>
+              <img src="./Imagens/botao-cadastrar-login/icons8-enter-128.svg" alt="">
+            </button>
+          </div>
+          <div class="box-redirect">
+            <span>Já possui uma conta? <a href="login.html">Faça Login</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="box box-titulo">
+        <h1 class="titulo1">CADASTRE-SE</h1>
+        <h1 class="titulo2">E REALIZE O SEU PRIMEIRO ACESSO</h1>
+      </div> -->
+
+      <!-- <div class="box box-form-primeira-tela" id="trocarTela1">
+        <form class="form-primeira-tela">
+          <div style="height: 40px"></div>
+          <input type="text" placeholder="Nome da Empresa" id="nomeEmpresa_id" />
+          <input type="text" placeholder="CNPJ" id="cnpj_id" />
+          <input type="tel" placeholder="Telefone" id="telefone_id" />
+          <input type="text" placeholder="CEP" id="cep_id" />
+          <input type="text" placeholder="Número" id="numero_id" />
+          <div id="erro" class="erroForm"></div>
+        </form>
+        <div class="btnCadastro">
+          <img src="./Imagens/botao-cadastrar-login/icons8-enter-128.svg" class="btncad"
+            style="width: 80px; cursor: pointer; margin-top: 20px" onclick="proxima_pagina1()" />
+          <h4>PRÓXIMA PÁGINA</h4>
+        </div>
+      </div> -->
+
+      <!-- <div class="box box-form-terceira-tela" id="trocarCadastrarEmpresa">
+        <form class="form-terceira-tela">
+          <div style="height: 40px"></div>
+          <input type="text" placeholder="Nome" id="nome_id" />
+          <input type="text" placeholder="Sobrenome" id="sobrenome_id" />
+          <input type="text" placeholder="E-mail" id="email_id" />
+          <input type="password" placeholder="Senha" id="senha_id" />
+          <input type="password" placeholder="Confirme sua senha" id="confirmarSenha_id" />
+          <div id="erro2" class="erroForm"></div>
+        </form>
+        <div class="btnCadastro">
+          <img src="./Imagens/botao-cadastrar-login/icons8-enter-128.svg" class="btncad"
+            style="width: 80px; cursor: pointer; margin-top: 20px"
+            onclick="validarEmpresa(() => CadastrarEmpresa(() => buscarEmpresa(() => CadastrarADM())))" />
+          <h4>FINALIZAR CADASTRO</h4>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- Fim do código relacionado a tela de cadastro -->
+
+  <!-- Início do código relacionado ao footer -- João -->
+
+  <div class="footer">
+    <div class="container">
+      <div class="labels">
+        <div class="slogan">
+          <h1>VOCÊ <span class="text-pink"> IDEALIZA </span></h1>
+          <h1>A MIRACLE <span class="text-pink"> REALIZA </span></h1>
+        </div>
+        <div class="links">
+          <!-- <a href="">Suporte</a>
+          <a href="">Privacidade</a> -->
+          <a href="contact.html">Fale Conosco</a>
+        </div>
+      </div>
+      <div class="labels">
+        <label>Tel.:(11) 5574-6844</label>
+        <label>E-mail: contato@miracle.com</label>
+        <label>Rua Haddock Lobo 595,</label>
+        <label>São Paulo, 01414-905</label>
+      </div>
+      <div class="labels">
+        <!-- <div class="sociais">
+          <img src="Imagens/socialmedia/icon-twiter/icons8-twitter-squared-64.svg" />
+          <img src="Imagens/socialmedia/icon-instagram/icons8-instagram-64.svg" />
+          <img src="Imagens/socialmedia/icon-facebook/icons8-facebook-64.svg" />
+        </div> -->
+        <div class="patente">
+          <img src="Imagens/bandeira-footer/icons8-brazil-40.svg" alt="" />
+          <label>© Miracle 2022</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fim do código relacionado ao footer -->
+</body>
+
+</html>
+<script src="./JS/cadastrarUser.js"></script>
+<script>
+  var cepInvalido = false;
+
+  function maskInputs(number) {
+    if (number == 1) {
+      cnpj_id.value = cnpj_id.value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+      telefone_id.value = telefone_id.value.replace(/^(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+
+      nomeEmpresa_id.style.border = "2px solid transparent";
+      telefone_id.style.border = "2px solid transparent";
+      cnpj_id.style.border = "2px solid transparent";
+      erro.innerHTML = '';
+    } else if (number == 2) {
+      var cepApi = `https://viacep.com.br/ws/${cep_id.value}/json/`;
+      var cep = cep_id.value;
+
+      numero_id.style.border = "2px solid transparent";
+      cep_id.style.border = "2px solid transparent";
+      erro2.innerHTML = '';
+
+      if (cep.length >= 8) {
+        cepApi = cepApi.replace(/-/g, '');
+        fetch(cepApi).then((resposta) => {
+          resposta.json().then((res) => {
+            if (res.erro) {
+              erro2.innerHTML = 'CEP inválido';
+              cepInvalido = true;
+            } else {
+              bairro_id.value = res.bairro;
+              logradouro_id.value = res.logradouro;
+              cidade_id.value = res.localidade;
+              estado_id.value = res.uf;
+              cepInvalido = false;
+            }
+          })
+        });
+      }
+      cep_id.value = cep_id.value.replace(/^(\d{5})(\d{3})/, "$1-$2");
+    } else {
+      nome_id.style.border = "2px solid transparent";
+      sobrenome_id.style.border = "2px solid transparent";
+      email_id.style.border = "2px solid transparent";
+      senha_id.style.border = "2px solid transparent";
+      confirmarSenha_id.style.border = "2px solid transparent";
+      confirmarEmail_id.style.border = "2px solid transparent";
+      erro3.innerHTML = '';
+    }
+  }
+
+  function backStep(number) {
+    if (number == 2) {
+      document.getElementById('step-2-ball-time-line').classList.remove('complete');
+      document.getElementById('step-2-ball-time-line').classList.add('here');
+      document.getElementById('step-3-ball-time-line').classList.remove('here');
+      document.getElementById('step-2-line-time-line').classList.remove('here');
+      document.getElementById('step-3').classList.add('card-hidden');
+      document.getElementById('step-2').classList.remove('card-hidden');
+    } else {
+      document.getElementById('step-1-ball-time-line').classList.remove('complete');
+      document.getElementById('step-1-ball-time-line').classList.add('here');
+      document.getElementById('step-2-ball-time-line').classList.remove('here');
+      document.getElementById('step-1-line-time-line').classList.remove('here');
+      document.getElementById('step-2').classList.add('card-hidden');
+      document.getElementById('step-1').classList.remove('card-hidden');
+    }
+  }
+
+  function validatorsStep(number) {
+    if (number == 1) {
+      var cnpj = cnpj_id.value.replace(/\./g, "").replace(/-/g, '').replace(/\//g, '');
+      var nomeEmpresa = nomeEmpresa_id.value.toUpperCase();
+      var telefone = telefone_id.value.replace(/\D/g, "").replace(/\(/g, '').replace(/\)/g, '').replace(/-/g, '');
+
+      nomeEmpresa_id.style.border = "2px solid transparent";
+      telefone_id.style.border = "2px solid transparent";
+      cnpj_id.style.border = "2px solid transparent";
+      erro.innerHTML = "";
+
+      if (nomeEmpresa.length >= 90 || nomeEmpresa.length < 2) {
+        nomeEmpresa_id.style.border = "2px solid red";
+        erro.innerHTML = 'Nome da empresa inválido';
+      } else if (cnpj.length < 14 || cnpj.length > 18) {
+        cnpj_id.style.border = "2px solid red";
+        erro.innerHTML = 'CNPJ inválido';
+      } else if (telefone.length < 8 || telefone.length > 14) {
+        telefone_id.style.border = "2px solid red";
+        erro.innerHTML = 'Telefone inválido';
+      } else {
+        document.getElementById('step-1-ball-time-line').classList.add('complete');
+        document.getElementById('step-1-ball-time-line').classList.remove('here');
+        document.getElementById('step-1-line-time-line').classList.add('here');
+        document.getElementById('step-2-ball-time-line').classList.add('here');
+        document.getElementById('step-1').classList.add('card-hidden');
+        document.getElementById('step-2').classList.remove('card-hidden');
+      }
+
+    } else if (number == 2) {
+      var numero = numero_id.value;
+      var cep = cep_id.value;
+
+      numero_id.style.border = "2px solid transparent";
+      cep_id.style.border = "2px solid transparent";
+      erro2.innerHTML = '';
+
+      if (numero.length < 1) {
+        numero_id.style.border = "2px solid red";
+        erro2.innerHTML = 'Número precisa ser preenchido';
+      } else if (cep.length < 8 || cep.length > 9 || cepInvalido) {
+        cep_id.style.border = "2px solid red";
+        erro2.innerHTML = 'CEP Inválido';
+      } else {
+        document.getElementById('step-2-ball-time-line').classList.add('complete');
+        document.getElementById('step-2-ball-time-line').classList.remove('here');
+        document.getElementById('step-2-line-time-line').classList.add('here');
+        document.getElementById('step-3-ball-time-line').classList.add('here');
+        document.getElementById('step-2').classList.add('card-hidden');
+        document.getElementById('step-3').classList.remove('card-hidden');
+      }
+    } else {
+      var nome = nome_id.value;
+      var sobrenome = sobrenome_id.value;
+      var email = email_id.value;
+      var confirmarEmail = confirmarEmail_id.value;
+      var senha = senha_id.value;
+      var confirmarSenha = confirmarSenha_id.value;
+
+      nome_id.style.border = "2px solid transparent";
+      sobrenome_id.style.border = "2px solid transparent";
+      email_id.style.border = "2px solid transparent";
+      senha_id.style.border = "2px solid transparent";
+      confirmarSenha_id.style.border = "2px solid transparent";
+      confirmarEmail_id.style.border = "2px solid transparent";
+      erro3.innerHTML = "";
+
+      if (nome.length >= 90 || nome.length < 2) {
+        nome_id.style.border = "2px solid red";
+        erro3.innerHTML = 'Nome inválido';
+      } else if (sobrenome.length >= 90 || sobrenome.length < 2) {
+        sobrenome_id.style.border = "2px solid red";
+        erro3.innerHTML = 'Sobrenome inválido';
+      } else if (
+        email == "" ||
+        email.indexOf("@") <= 0 ||
+        email.indexOf(".com") < email.indexOf("@") ||
+        email.length > 90
+      ) {
+        email_id.style.border = "2px solid red";
+        erro3.innerHTML = 'Email inválido';
+      } else if (email != confirmarEmail) {
+        email_id.style.border = "2px solid red";
+        confirmarEmail_id.style.border = "2px solid red";
+        erro3.innerHTML = 'Os emails devem ser iguais';
+      } else if (senha != confirmarSenha) {
+        senha_id.style.border = "2px solid red";
+        confirmarSenha_id.style.border = "2px solid red";
+        erro3.innerHTML = 'As senhas devem ser iguais';
+      } else {
+        CadastrarEmpresa(() => buscarEmpresa(() => CadastrarADM()));
+      }
+    }
+
+  }
+
+  // function proxima_pagina1() {
+
+  //   var numero = numero_id.value;
+  //   var cep = cep_id.value;
+
+  //   nomeEmpresa_id.style.border = "";
+  //   telefone_id.style.border = "";
+  //   cnpj_id.style.border = "";
+
+
+
+  //   if (nomeEmpresa.length >= 90 || nomeEmpresa.length < 2) {
+  //     nomeEmpresa_id.style.border = "2px solid red";
+  //     erro.innerHTML = 'Nome da empresa inválido';
+  //   } else
+  //     if (cnpj.length < 14 || cnpj.length > 18) {
+  //       cnpj_id.style.border = "2px solid red";
+  //       erro.innerHTML = 'CNPJ inválido';
+  //     } else
+  //       if (telefone.length < 8 || telefone.length > 14) {
+  //         telefone_id.style.border = "2px solid red";
+  //         erro.innerHTML = 'Telefone inválido';
+  //       } else
+  //         if (numero.length < 1) {
+  //           numero_id.style.border = "2px solid red";
+  //           erro.innerHTML = 'Número precisa ser preenchido';
+  //         } else
+  //           if (cep.length < 8 || cep.length > 9) {
+  //             cep_id.style.border = "2px solid red";
+  //             erro.innerHTML = 'CEP Inválido';
+  //           }
+  //   if (
+  //     cnpj_id.style.border != "2px solid red" &&
+  //     nomeEmpresa_id.style.border != "2px solid red" &&
+  //     telefone_id.style.border != "2px solid red" &&
+  //     numero_id.style.border != "2px solid red" &&
+  //     cep_id.style.border != "2px solid red"
+  //   ) {
+  //     trocarTela1.style.display = "none";
+  //     trocarCadastrarEmpresa.style.display = "flex";
+  //   }
+  // }
+
+  // function validarEmpresa(_callback) {
+  //   var nome = nome_id.value;
+  //   var sobrenome = sobrenome_id.value;
+  //   var email = email_id.value;
+  //   var senha = senha_id.value;
+  //   var confirmarSenha = confirmarSenha_id.value;
+
+  //   nome_id.style.border = "";
+  //   sobrenome_id.style.border = "";
+  //   email_id.style.border = "";
+  //   senha_id.style.border = "";
+  //   confirmarSenha_id.style.border = "";
+  //   erro2.innerHTML = "";
+
+  //   if (nome.length >= 90 || nome.length < 2) {
+  //     nome_id.style.border = "2px solid red";
+  //     erro2.innerHTML = 'Nome inválido';
+  //   }
+  //   if (sobrenome.length >= 90 || sobrenome.length < 2) {
+  //     sobrenome_id.style.border = "2px solid red";
+  //     erro2.innerHTML = 'Sobrenome inválido';
+  //   }
+  //   if (
+  //     email == "" ||
+  //     email.indexOf("@") <= 0 ||
+  //     email.indexOf(".com") < email.indexOf("@") ||
+  //     email.length > 90
+  //   ) {
+  //     email_id.style.border = "2px solid red";
+  //     erro2.innerHTML = 'Email inválido';
+  //   }
+  //   if (senha != confirmarSenha) {
+  //     senha_id.style.border = "2px solid red";
+  //     confirmarSenha_id.style.border = "2px solid red";
+  //     erro2.innerHTML = 'As senhas devem ser iguais';
+  //   }
+  //   if (
+  //     nome_id.style.border != "2px solid red" &&
+  //     sobrenome_id.style.border != "2px solid red" &&
+  //     senha_id.style.border != "2px solid red" &&
+  //     confirmarSenha_id.style.border != "2px solid red"
+  //   ) {
+  //     _callback();
+  //   }
+  // }
+
+  function CadastrarEmpresa(_callback) {
+    // PARAMETRIZANDO VARIÁVEIS
+    var cnpjVar = cnpj_id.value.replace(/\./g, "").replace(/-/g, '').replace(/\//g, '');
+    var nomeEmpresaVar = nomeEmpresa_id.value.toUpperCase();
+    var telefoneVar = telefone_id.value.replace(/\D/g, "").replace(/\(/g, '').replace(/\)/g, '').replace(/-/g, '');
+    var numeroVar = numero_id.value;
+    console.log(cep_id.value);
+    var cepVar = cep_id.value.replace(/-/g, '');
+
+    fetch("/usuarios/cadastrarEmpresa", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cnpjServer: cnpjVar,
+        nomeEmpresaServer: nomeEmpresaVar,
+        telefoneServer: telefoneVar,
+        numeroServer: numeroVar,
+        cepServer: cepVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          _callback();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function buscarEmpresa(_callback) {
+    fetch("/usuarios/buscarEmpresa", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then((json) => {
+            console.log(json.idEmpresa);
+            console.log(JSON.stringify(json));
+            sessionStorage.ID_EMPRESA = json.idEmpresa;
+            _callback();
+          });
+        } else {
+          throw "Houve um erro ao tentar realizar o Busca!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+      });
+  }
+</script>

@@ -1,0 +1,118 @@
+.container_tabelas_maquinas{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tabela_maquinas{
+    width: 60%;
+    min-height: 300px;
+    max-height: 300px;
+    background-color: #ECECEC;
+    padding: 20px;
+    overflow:auto;
+    border-radius: 20px;
+}
+.tabela_maquinas::-webkit-scrollbar{
+    background-color: #C989D2;
+    width: 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.tabela_maquinas table{
+    width: 100%;
+    max-height: 200px;
+}
+.status_maquina{
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+    margin-left: 46%;
+    margin-right: 46%;
+}
+
+.div-warning {
+    background-color: red;
+}
+
+.div-alert {
+    background-color: yellow;
+}
+
+.div-good {
+    background-color: green;
+}
+
+.txt_cadastrar{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+.box_txt{
+    width: 50%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.loading-user {
+    height: 100px;
+    width: 100px;
+    display: block;
+}
+
+.box-feedback-user {
+    margin-top: 80px;
+}
+
+.box_txt h1 {
+    color: #7E7878;
+}
+
+.box_txt a{
+    text-decoration: none;
+    color: #7E7878;
+}
+
+.td_curto{
+    width: 8%;
+    height: 30px;
+    border-bottom: 2px solid black;
+    text-align: center; 
+}
+.td_normal{
+    width: 20%;
+    height: 30px;
+    border-bottom: 2px solid black;
+    text-align: center; 
+}
+.td_grande{
+    width: 25%;
+    height: 30px;
+    border-bottom: 2px solid black;
+    text-align: center; 
+}
+
+.td{
+    height: 40px;
+    text-align: center;
+}
+
+.tdLupa{
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+.td .lupa{
+    cursor: pointer;
+}
+  

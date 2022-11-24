@@ -1,0 +1,219 @@
+.container_tabelas_pergunta {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_txt {
+    padding: 20px 0 !important;
+}
+
+.box_txt h1 {
+    color: #7E7878;
+}
+
+.tabela_pergunta {
+    width: 60%;
+    min-height: 300px;
+    max-height: 300px;
+    background-color: #ECECEC;
+    padding: 20px;
+    overflow: auto;
+    border-radius: 20px;
+}
+
+.tabela_pergunta::-webkit-scrollbar {
+    background-color: #C989D2;
+    width: 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.tabela_pergunta table {
+    width: 100%;
+    max-height: 200px;
+}
+
+.txt_cadastrar {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.box_txt {
+    width: 60%;
+    height: 50px;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.box_txt a {
+    background-color: #934c9e;
+    color: #fff;
+    padding: 5px 30px;
+    border-radius: 5px;
+    border: none;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.td_curto {
+    width: 5%;
+    height: 30px;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.td_normal {
+    width: 20%;
+    height: 30px;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.td_grande {
+    width: 40%;
+    height: 30px;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.td {
+    height: 40px;
+    text-align: center;
+}
+
+.tdLupa {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+.td .lupa {
+    cursor: pointer;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.modal, .modal-insert {
+    display: none;
+    justify-content: center;
+    /* align-items: center; */
+    height: 70vh;
+    width: 100%;
+    /* padding-top: 30px; */
+}
+
+.modal-painel {
+    background-color: #ECECEC;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding: 20px 30px;
+    height: 65%;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.modal-painel .close{
+    display: flex;
+    flex-direction: row;
+    height: 20%;
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
+.close .alter-title{
+    margin: 0;
+    width: 100%;
+    color: #934c9e;
+}
+
+.modal-painel .inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 65%;
+    /* border: 1px solid red; */
+}
+
+.inputs label{
+    font-weight: 500;
+    font-size: 23px;
+    color: rgb(83, 83, 83);
+}
+
+.inputs input{
+    border: 1px solid black;
+    height: 9%;
+    width: 80%;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px 6px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.block{
+    background-color: white;
+}
+
+.modal-painel .button{
+    align-self: center;
+    display: flex;
+    height: 25%;
+    width: 82%;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+
+.button button {
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    gap: 7px;
+    height: 50%;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    background-color: #b46cbf;
+    box-shadow: 0px 0px 23px -16px rgba(0,0,0,0.75);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.button button:hover {
+    transition: .2s;
+    box-shadow: 0px 0px 15px #b46cbf;
+}
+
+.close-title:hover {
+    transition: .2s;
+    text-shadow: 0 0 30px #b46cbf;
+}
+
+.loading-user {
+    height: 100px;
+    width: 100px;
+    display: block;
+}
+
+.box-feedback-user {
+    margin-top: 80px;
+}

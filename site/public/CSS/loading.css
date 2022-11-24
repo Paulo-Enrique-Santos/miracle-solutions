@@ -1,0 +1,24 @@
+.circle {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 5px solid #934c9e;
+    margin: auto;
+    display: none;
+}
+
+.loading {
+    border-bottom: 5px solid transparent;
+    animation: loadingUp 1s infinite linear;
+  }
+  
+  
+  @keyframes loadingUp {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
