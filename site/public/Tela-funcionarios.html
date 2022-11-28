@@ -192,6 +192,8 @@
                         tr.appendChild(td6);
 
                         if (i == resposta.length - 1) {
+                            boxFeedback.style.display = 'none';
+                            loading.style.display = 'none';
                             atualizarPesquisa(sessionStorage.ID_USUARIO);
                         }
                     }
@@ -211,8 +213,6 @@
         fetch(`/usuarios/atualizarPesquisa/${idUsuario}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    boxFeedback.style.display = 'none';
-                    loading.style.display = 'none';
                     throw "Nenhum resultado encontrado!!";
                 }
 
