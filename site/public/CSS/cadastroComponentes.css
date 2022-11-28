@@ -132,12 +132,25 @@ body {
   
   
     @media only screen and (min-width: 200px) {
+          .time-line .step .ball {
+            background-size: 7px;
+          }
+
+          .time-line .complete {
+            background-size: 10px !important;
+          }
+
+          .time-line {
+            position: initial;
+            padding-bottom: 15px;
+          }
+      
           .telaCadastro .containerCadastro{
               display: flex;
               flex-direction: column;
               justify-content: center;
               align-items: center;
-              height: 703px;
+              padding-bottom: 30px;
           }
   
           .box{

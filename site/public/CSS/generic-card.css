@@ -210,5 +210,18 @@
 
     .generic-card {
         min-width: auto;
+        max-width: 90%;
+        padding: 30px 10px;
+    }
+}
+
+@media only screen and (max-width: 610px) {
+    .box-large {
+        flex-direction: column;
+    }
+
+    .box-large .card-inputs {
+        width: 100%;
+        margin-top: 10px;
     }
 }

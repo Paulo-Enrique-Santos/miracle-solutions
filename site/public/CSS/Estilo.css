@@ -234,6 +234,7 @@ a {
   .header-menu {
     height: 100%;
     cursor: pointer;
+    z-index: 99;
   }
 }
 
