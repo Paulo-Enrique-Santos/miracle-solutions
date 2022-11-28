@@ -397,7 +397,7 @@ function getStatsMaquinas(idMaquina) {
             if (dadoCpu === 0 || dadoRam === 0) {
               stats.defect.push(idMaquina);
             } else {
-              if (dadoDisco > valueWarning || dadoCpu > valueWarning || dadoRam > valueWarning) {
+              if (dadoCpu > valueWarning || dadoRam > valueWarning) {
                 stats.warning.push(idMaquina);
               } else if (dadoCpu < valueGood || dadoRam < valueGood) {
                 stats.good.push(idMaquina);
