@@ -218,6 +218,7 @@
 @media only screen and (max-width: 610px) {
     .box-large {
         flex-direction: column;
+        gap: 0px;
     }
 
     .box-large .card-inputs {
