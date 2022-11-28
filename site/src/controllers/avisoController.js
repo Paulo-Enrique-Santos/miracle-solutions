@@ -203,7 +203,6 @@ function deleteFuncById(req, res) {
           .deletePesquisaById(idUsuario)
           .then(function (resultado) {
             console.log('Pesquisa Deletada');
-            res.json(resultado);
             avisoModel
               .deleteFuncById(idUsuario)
               .then(function (resultado) {
@@ -241,7 +240,6 @@ function deleteFuncById(req, res) {
                     .deletePesquisaById(idUsuario)
                     .then(function (resultado) {
                       console.log('Pesquisa Deletada');
-                      res.json(resultado);
                       avisoModel
                         .deleteFuncById(idUsuario)
                         .then(function (resultado) {
@@ -289,7 +287,6 @@ function deleteFuncById(req, res) {
                             .deletePesquisaById(idUsuario)
                             .then(function (resultado) {
                               console.log('Pesquisa Deletada');
-                              res.json(resultado);
                               avisoModel
                                 .deleteFuncById(idUsuario)
                                 .then(function (resultado) {
