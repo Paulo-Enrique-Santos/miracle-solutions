@@ -229,6 +229,7 @@ function deleteFuncById(req, res) {
         avisoModel
           .getComponenteByMaquina(idMaquina)
           .then(function (resultado) {
+
             if (resultado.length == 0) {
               avisoModel
                 .deleteMachine(idMaquina)
@@ -240,6 +241,7 @@ function deleteFuncById(req, res) {
                     .deletePesquisaById(idUsuario)
                     .then(function (resultado) {
                       console.log('Pesquisa Deletada');
+
                       avisoModel
                         .deleteFuncById(idUsuario)
                         .then(function (resultado) {
@@ -264,6 +266,7 @@ function deleteFuncById(req, res) {
                   res.status(500).json(erro.sqlMessage);
                 });
             }
+
             for (let i = 0; i < resultado.length; i++) {
               const idComponent = resultado[i].idComponente;
 
@@ -272,50 +275,53 @@ function deleteFuncById(req, res) {
                 .then(function (resultado) {
                   console.log('Dados deletados com sucesso');
 
-                  avisoModel
-                    .deleteComponentByIdMachine(idMaquina)
-                    .then(function (resultado) {
-                      console.log('Componentes deletados com sucesso');
+                  if (resultado.length - 1 == i) {
+                    avisoModel
+                      .deleteComponentByIdMachine(idMaquina)
+                      .then(function (resultado) {
+                        console.log('Componentes deletados com sucesso');
 
-                      avisoModel
-                        .deleteMachine(idMaquina)
-                        .then(function (resultado) {
-                          console.log('Máquinas deletadas com sucesso');
-                          console.log('Máquinas Deletadas');
+                        avisoModel
+                          .deleteMachine(idMaquina)
+                          .then(function (resultado) {
+                            console.log('Máquinas deletadas com sucesso');
+                            console.log('Máquinas Deletadas');
 
-                          avisoModel
-                            .deletePesquisaById(idUsuario)
-                            .then(function (resultado) {
-                              console.log('Pesquisa Deletada');
-                              avisoModel
-                                .deleteFuncById(idUsuario)
-                                .then(function (resultado) {
-                                  console.log('Funcionário Deletado');
-                                  res.json(resultado);
-                                })
-                                .catch(function (erro) {
-                                  console.log(erro);
-                                  console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
-                                  res.status(500).json(erro.sqlMessage);
-                                });
-                            })
-                            .catch(function (erro) {
-                              console.log(erro);
-                              console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
-                              res.status(500).json(erro.sqlMessage);
-                            });
-                        })
-                        .catch(function (erro) {
-                          console.log(erro);
-                          console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
-                          res.status(500).json(erro.sqlMessage);
-                        });
-                    })
-                    .catch(function (erro) {
-                      console.log(erro);
-                      console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
-                      res.status(500).json(erro.sqlMessage);
-                    });
+                            avisoModel
+                              .deletePesquisaById(idUsuario)
+                              .then(function (resultado) {
+                                console.log('Pesquisa Deletada');
+                                
+                                avisoModel
+                                  .deleteFuncById(idUsuario)
+                                  .then(function (resultado) {
+                                    console.log('Funcionário Deletado');
+                                    res.json(resultado);
+                                  })
+                                  .catch(function (erro) {
+                                    console.log(erro);
+                                    console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+                                    res.status(500).json(erro.sqlMessage);
+                                  });
+                              })
+                              .catch(function (erro) {
+                                console.log(erro);
+                                console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+                                res.status(500).json(erro.sqlMessage);
+                              });
+                          })
+                          .catch(function (erro) {
+                            console.log(erro);
+                            console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                            res.status(500).json(erro.sqlMessage);
+                          });
+                      })
+                      .catch(function (erro) {
+                        console.log(erro);
+                        console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                        res.status(500).json(erro.sqlMessage);
+                      });
+                  }
                 })
                 .catch(function (erro) {
                   console.log(erro);
