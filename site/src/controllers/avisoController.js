@@ -198,16 +198,18 @@ function deleteFuncById(req, res) {
   avisoModel
     .getIdMaquinasByFuncId(idUsuario)
     .then(function (resultado) {
+
       if (resultado.length === 0) {
         avisoModel
           .deletePesquisaById(idUsuario)
-          .then(function (resultado) {
+          .then(function () {
             console.log('Pesquisa Deletada');
+
             avisoModel
               .deleteFuncById(idUsuario)
-              .then(function (resultado) {
+              .then(function (resultFunc1) {
                 console.log('Funcionário Deletado');
-                res.json(resultado);
+                res.json(resultFunc1);
               })
               .catch(function (erro) {
                 console.log(erro);
@@ -226,27 +228,28 @@ function deleteFuncById(req, res) {
       for (let i = 0; i < resultado.length; i++) {
         const idMaquina = resultado[i].idComputador;
         idComputador = idMaquina;
+
         avisoModel
           .getComponenteByMaquina(idMaquina)
-          .then(function (resultado) {
+          .then(function (rest) {
 
-            if (resultado.length == 0) {
+            if (rest.length == 0) {
               avisoModel
                 .deleteMachine(idMaquina)
-                .then(function (resultado) {
+                .then(function () {
                   console.log('Máquinas deletadas com sucesso');
                   console.log('Máquinas Deletadas');
 
                   avisoModel
                     .deletePesquisaById(idUsuario)
-                    .then(function (resultado) {
+                    .then(function () {
                       console.log('Pesquisa Deletada');
 
                       avisoModel
                         .deleteFuncById(idUsuario)
-                        .then(function (resultado) {
+                        .then(function (resultFunc2) {
                           console.log('Funcionário Deletado');
-                          res.json(resultado);
+                          res.json(resultFunc2);
                         })
                         .catch(function (erro) {
                           console.log(erro);
@@ -267,36 +270,36 @@ function deleteFuncById(req, res) {
                 });
             }
 
-            for (let i = 0; i < resultado.length; i++) {
-              const idComponent = resultado[i].idComponente;
+            for (let i = 0; i < rest.length; i++) {
+              const idComponent = rest[i].idComponente;
 
               avisoModel
                 .deleteDadsByIdComponent(idComponent)
-                .then(function (resultado) {
+                .then(function () {
                   console.log('Dados deletados com sucesso');
 
-                  if (resultado.length - 1 == i) {
-                    avisoModel
-                      .deleteComponentByIdMachine(idMaquina)
-                      .then(function (resultado) {
-                        console.log('Componentes deletados com sucesso');
+                  avisoModel
+                    .deleteComponentByIdMachine(idMaquina)
+                    .then(function () {
+                      console.log('Componentes deletados com sucesso');
 
+                      if (rest.length - 1 == i) {
                         avisoModel
                           .deleteMachine(idMaquina)
-                          .then(function (resultado) {
+                          .then(function () {
                             console.log('Máquinas deletadas com sucesso');
                             console.log('Máquinas Deletadas');
 
                             avisoModel
                               .deletePesquisaById(idUsuario)
-                              .then(function (resultado) {
+                              .then(function () {
                                 console.log('Pesquisa Deletada');
-                                
+
                                 avisoModel
                                   .deleteFuncById(idUsuario)
-                                  .then(function (resultado) {
+                                  .then(function (responseFunc3) {
                                     console.log('Funcionário Deletado');
-                                    res.json(resultado);
+                                    res.json(responseFunc3);
                                   })
                                   .catch(function (erro) {
                                     console.log(erro);
@@ -315,13 +318,13 @@ function deleteFuncById(req, res) {
                             console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
                             res.status(500).json(erro.sqlMessage);
                           });
-                      })
-                      .catch(function (erro) {
-                        console.log(erro);
-                        console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
-                        res.status(500).json(erro.sqlMessage);
-                      });
-                  }
+                      }
+                    })
+                    .catch(function (erro) {
+                      console.log(erro);
+                      console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                      res.status(500).json(erro.sqlMessage);
+                    });
                 })
                 .catch(function (erro) {
                   console.log(erro);

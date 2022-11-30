@@ -473,7 +473,8 @@ function showAlerts() {
     const aviso = document.createElement('p');
     boxAviso.appendChild(aviso);
     aviso.innerHTML = ` 
-      Temos ${stats.defect.length} máquina${stats.defect.length > 1 ? 's' : ''} com problemas para obter dados de algum componente.
+      <p>Temos ${stats.defect.length} máquina${stats.defect.length > 1 ? 's' : ''} com problemas para obter dados de algum componente.</p>
+      <button>Detalhes</button>
     `;
     aviso.setAttribute(
       'onclick',

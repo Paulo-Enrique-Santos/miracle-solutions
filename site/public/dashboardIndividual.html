@@ -130,9 +130,10 @@
       </div>
     </div>
   </div>
- <!-- Start of miraclesolutionshelp Zendesk Widget script -->
- <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=9189050c-e509-4e10-941b-ba933f8811aa"> </script>
- <!-- End of miraclesolutionshelp Zendesk Widget script -->
+  <!-- Start of miraclesolutionshelp Zendesk Widget script -->
+  <script id="ze-snippet"
+    src="https://static.zdassets.com/ekr/snippet.js?key=9189050c-e509-4e10-941b-ba933f8811aa"> </script>
+  <!-- End of miraclesolutionshelp Zendesk Widget script -->
 </body>
 
 </html>
@@ -182,7 +183,7 @@
   function atualizacaoPeriodica() {
     obterdadosCPU(sessionStorage.idMaquina,
       //obterdadosDisco(sessionStorage.idMaquina,
-        obterdadosRAM(sessionStorage.idMaquina));
+      obterdadosRAM(sessionStorage.idMaquina));
     setTimeout(atualizacaoPeriodica, 2000);
   }
 
@@ -191,6 +192,11 @@
       .then(resposta => {
 
         if (resposta.ok) {
+          if (resposta.status == 204) {
+            componenteCPU.style.backgroundColor = "red";
+            dadoCPU.innerHTML = '0%';
+            estadoCPU.innerHTML = "Defeito";
+          }
           resposta.json().then(resposta => {
             dadoCPU.innerHTML = resposta[0].dado + "%";
 
@@ -256,9 +262,13 @@
   function obterdadosRAM(fkUsuario) {
     fetch(`/medidas/tempo-realRAM/${fkUsuario}`)
       .then(resposta => {
-
         if (resposta.ok) {
-          resposta.json().then(resposta => {
+          if (resposta.status == 204) {
+            componenteRAM.style.backgroundColor = "red";
+            dadoRAM.innerHTML = '0%';
+            estadoRAM.innerHTML = "Defeito";
+          }
+          resposta.json().then(resposta => {            
             dadoRAM.innerHTML = resposta[0].dado + "%";
 
             if (resposta[0].dado < 49) {

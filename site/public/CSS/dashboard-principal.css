@@ -265,12 +265,21 @@ body {
   display: flex;
   width: 80%;
   margin-bottom: 30px;
-  height: 50px;
   background: rgb(52, 241, 109);
   align-items: center;
   flex-direction: column;
   justify-content: center;
   border: 2px solid #7e7878;
+}
+
+.avisos button {
+  background-color: #934c9e;
+  color: #fff;
+  padding: 5px 30px;
+  border-radius: 5px;
+  border: none;
+  transition: .3s;
+  cursor: pointer;
 }
 
 .avisos p{
@@ -362,7 +371,6 @@ element.style {
 
 p {
   flex-direction: row;
-  height: 130px;
   width: 100%;
 }
 

@@ -159,10 +159,17 @@ function deleteFuncById(idUsuario) {
 }
 
 function deletePesquisaById(idUsuario) {
+  var instrucao1 = `
+    delete Resposta from Resposta 
+      join Pesquisa on Resposta.idPesquisa = Pesquisa.idPesquisa
+        where fkUsuario = ${idUsuario};
+  `;
+
   var instrucao = `
   delete from Pesquisa where fkUsuario = ${idUsuario};
   `;
 
+  database.executar(instrucao1);
   return database.executar(instrucao);
 }
 

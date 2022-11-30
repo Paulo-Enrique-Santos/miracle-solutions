@@ -282,6 +282,8 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
+            window.alert("Tivemos problema para deletar esse funcionário");
+            window.location = "Tela-funcionarios.html";
         });
     }
 
